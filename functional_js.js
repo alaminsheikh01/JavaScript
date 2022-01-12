@@ -60,4 +60,18 @@ const data2 = setTimeout(() => {
   return 100;
 });
 
-console.log(data2);
+// console.log(data2);
+
+function parent() {
+  let money = 1000;
+
+  function child() {
+    console.log("I am taking 500 from parent");
+    money -= 500;
+  }
+
+  child();
+  return money;
+}
+
+console.log(parent());
