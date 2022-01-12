@@ -46,3 +46,18 @@ function calculate(a, b, cb) {
 }
 
 console.log(calculate(3, 4, sum));
+
+const cb = () => {
+  console.log("Hello from callback");
+};
+
+setTimeout(cb, 5000);
+
+const data = [1, 2, 3].map((a) => a * 2);
+console.log(data);
+
+const data2 = setTimeout(() => {
+  return 100;
+});
+
+console.log(data2);
