@@ -24,6 +24,17 @@
 //     }
 // }
 
-do{
-    console.log("It wil run at least once")
-}while(false)
+// do{
+//     console.log("It wil run at least once")
+// }while(false)
+
+function nameOfFunction(name){
+    if(!name){
+        console.log('Please provide your name ')
+    }else{
+        console.log("Hello", name)
+    }
+}
+
+nameOfFunction("Alamin Sheikh")
+nameOfFunction()
