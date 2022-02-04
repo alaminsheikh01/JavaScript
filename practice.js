@@ -77,4 +77,40 @@ const arrayOfArray = [
   [4, 5, 6],
   [7, 8, 9]
 ]
+
 const mixed = [true, null, "SL", 100, [1, 3, 4]]
+
+// Object
+
+const student1 = {
+	firstName: 'Abu',
+	secondName: 'Rayhan',
+	email: 'rayhan@example.com',
+	age: 25,
+	attend: true,
+};
+
+const student2 = {
+	firstName: 'Alvi',
+	secondName: 'Chowdhury',
+	email: 'alvi@example.com',
+	age: 25,
+	attend: true,
+};
+
+const student3 = {
+	firstName: 'Akib',
+	secondName: 'Ahmad',
+	email: 'akib@example.com',
+	age: 25,
+	attend: true,
+};
+
+const allStudents = [student1, student2, student3];
+for (let i = 0; i < allStudents.length; i++) {
+	sendEmail(allStudents[i].email);
+}
+
+function sendEmail(email) {
+	console.log('Sending email to', email);
+}
