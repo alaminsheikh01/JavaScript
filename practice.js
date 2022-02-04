@@ -114,3 +114,5 @@ for (let i = 0; i < allStudents.length; i++) {
 function sendEmail(email) {
 	console.log('Sending email to', email);
 }
+
+//updated check
