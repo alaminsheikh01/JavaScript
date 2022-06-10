@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function* generateId() {
   let id = 1;
@@ -7,18 +7,22 @@ function* generateId() {
   }
 }
 const genId = generateId();
-console.log(genId.next().value);
-console.log(genId.next().value);
-console.log(genId.next().value);
 
 const initialInputState = {
-  a: 10,
-  b: 20,
+  a: 20,
+  b: 10,
 };
 
 const App = () => {
   const [inputState, setInputState] = useState({ ...initialInputState });
   const [result, setResult] = useState(0);
+  const [histories, setHistories] = useState([]);
+  const [restoredHistory, setRestoredHistory] = useState(null);
+  // useEffect(() => {
+  //   if (restoredHistory != null) {
+  //     handleArithmethicOps(restoredHistory.operations);
+  //   }
+  // }, [inputState]);
 
   const handleChangeField = (e) => {
     setInputState({
@@ -37,15 +41,51 @@ const App = () => {
       ...initialInputState,
     });
     setResult(0);
+    setHistories([]);
   };
 
   const handleArithmethicOps = (operations) => {
+    if (!inputState.a || !inputState.b) {
+      alert("invalid input");
+      return;
+    }
+
     const f = new Function(
       "operations",
       `return ${inputState.a} ${operations}  ${inputState.b}`
     );
-    setResult(f(operations));
+    const result = f(operations);
+    setResult(result);
     // setResult(eval(`${inputState.a} ${operations} ${inputState.b}`));
+
+    const history = {
+      id: genId.next().value,
+      inputs: { ...inputState },
+      operations,
+      result,
+      date: new Date(),
+    };
+
+    setHistories([history, ...histories]);
+  };
+
+  const generateHistory = (operations, result) => {
+    const history = {
+      id: genId.next().value,
+      inputs: { ...inputState },
+      operations,
+      result,
+      date: new Date(),
+    };
+
+    setHistories([history, ...histories]);
+  };
+
+  const handleRestore = (historyItem) => {
+    setInputState({ ...historyItem.inputs });
+    setResult(historyItem.result);
+    setRestoredHistory(historyItem);
+    // handleArithmethicOps(historyItem.operations);
   };
 
   return (
@@ -78,16 +118,37 @@ const App = () => {
       </div>
       <div>
         <p>History</p>
-        <p>
-          <small>There is no history</small>
-        </p>
-        <ul>
-          <li>
-            <p>Operations: </p>
-            <small>time</small>
-            <button>restore</button>
-          </li>
-        </ul>
+        {histories.length === 0 ? (
+          <p>
+            <small>There is no history</small>
+          </p>
+        ) : (
+          <ul>
+            {histories.map((historyItem) => (
+              <li key={historyItem.id}>
+                <p>
+                  Operations: {historyItem.inputs.a} {historyItem.operations}{" "}
+                  {historyItem.inputs.b}
+                </p>
+                <p>Result: {historyItem.result}</p>
+                <small>
+                  {historyItem.date.toLocaleDateString()}
+                  {" -> "}
+                  {historyItem.date.toLocaleTimeString()}
+                </small>
+                <button
+                  onClick={() => handleRestore(historyItem)}
+                  disabled={
+                    restoredHistory != null &&
+                    restoredHistory.id === historyItem.id
+                  }
+                >
+                  restore
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
