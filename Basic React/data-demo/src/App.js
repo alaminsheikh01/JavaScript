@@ -1,5 +1,16 @@
 import { useState } from "react";
 
+function* generateId() {
+  let id = 1;
+  while (true) {
+    yield id++;
+  }
+}
+const genId = generateId();
+console.log(genId.next().value);
+console.log(genId.next().value);
+console.log(genId.next().value);
+
 const initialInputState = {
   a: 10,
   b: 20,
@@ -29,12 +40,12 @@ const App = () => {
   };
 
   const handleArithmethicOps = (operations) => {
-    // const f = new Function(
-    //   "operations",
-    //   `return ${inputState.a} ${operations}  ${inputState.b}`
-    // );
-    // setResult(f(operations));
-    setResult(eval(`${inputState.a} ${operations} ${inputState.b}`));
+    const f = new Function(
+      "operations",
+      `return ${inputState.a} ${operations}  ${inputState.b}`
+    );
+    setResult(f(operations));
+    // setResult(eval(`${inputState.a} ${operations} ${inputState.b}`));
   };
 
   return (
@@ -62,6 +73,7 @@ const App = () => {
         <button onClick={() => handleArithmethicOps("-")}>-</button>
         <button onClick={() => handleArithmethicOps("*")}>*</button>
         <button onClick={() => handleArithmethicOps("/")}>/</button>
+        <button onClick={() => handleArithmethicOps("%")}>%</button>
         <button onClick={handleClear}>Clear</button>
       </div>
       <div>
@@ -69,9 +81,22 @@ const App = () => {
         <p>
           <small>There is no history</small>
         </p>
+        <ul>
+          <li>
+            <p>Operations: </p>
+            <small>time</small>
+            <button>restore</button>
+          </li>
+        </ul>
       </div>
     </div>
   );
 };
 
 export default App;
+
+/**
+ * we can find direct time from console panel 
+ * new Date().toLocaleDateString()
+ '6/10/2022'
+ */
