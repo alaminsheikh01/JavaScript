@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 const initialInputState = {
-  a: 0,
-  b: 0,
+  a: 10,
+  b: 20,
 };
 
 const App = () => {
@@ -29,11 +29,12 @@ const App = () => {
   };
 
   const handleArithmethicOps = (operations) => {
-    const f = new Function(
-      "operations",
-      `return ${inputState.a} ${operations}  ${inputState.b}`
-    );
-    setResult(f(operations));
+    // const f = new Function(
+    //   "operations",
+    //   `return ${inputState.a} ${operations}  ${inputState.b}`
+    // );
+    // setResult(f(operations));
+    setResult(eval(`${inputState.a} ${operations} ${inputState.b}`));
   };
 
   return (
