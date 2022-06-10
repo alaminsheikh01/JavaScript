@@ -7,6 +7,7 @@ const initialInputState = {
 
 const App = () => {
   const [inputState, setInputState] = useState({ ...initialInputState });
+  const [result, setResult] = useState(0);
 
   const handleChangeField = (e) => {
     setInputState({
@@ -24,6 +25,7 @@ const App = () => {
     setInputState({
       ...initialInputState,
     });
+    setResult(0);
   };
 
   const handleArithmethicOps = (operations) => {
@@ -31,12 +33,12 @@ const App = () => {
       "operations",
       `return ${inputState.a} ${operations}  ${inputState.b}`
     );
-    console.log(f(operations));
+    setResult(f(operations));
   };
 
   return (
     <div style={{ width: "50%", margin: "0 auto" }}>
-      <h1>Result: 0</h1>
+      <h1>Result: {result}</h1>
 
       <div>
         <p>Inputs</p>
