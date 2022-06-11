@@ -18,6 +18,7 @@ const App = () => {
   const [result, setResult] = useState(0);
   const [histories, setHistories] = useState([]);
   const [restoredHistory, setRestoredHistory] = useState(null);
+
   // useEffect(() => {
   //   if (restoredHistory != null) {
   //     handleArithmethicOps(restoredHistory.operations);

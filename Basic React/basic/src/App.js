@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+const ContactForm = () => {
+  return (
+    <form>
+      <div>
+        <label htmlFor="name">Name:</label>
+        <input type="text" id="name" name="name" />
+      </div>
+      <div>
+        <label htmlFor="email">Email:</label>
+        <input type="text" id="email" name="email" />
+      </div>
+      <input type="submit" value="Create New Contact" />
+    </form>
+  );
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Contact App</h1>
+      <ContactForm />
     </div>
   );
 }
