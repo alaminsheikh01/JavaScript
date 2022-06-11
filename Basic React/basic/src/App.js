@@ -5,7 +5,7 @@ const CONTACT_FORM_INIT_STATE = {
   email: "",
 };
 
-const ContactForm = () => {
+const ContactForm = ({ getdata1 }) => {
   const [values, setValue] = useState({ ...CONTACT_FORM_INIT_STATE });
   const { name, email } = values;
 
@@ -18,7 +18,7 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
+    getdata1(values);
   };
 
   return (
@@ -49,11 +49,40 @@ const ContactForm = () => {
   );
 };
 
+const Table = ({ values }) => {
+  return (
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {values.map((item, index) => (
+          <tr key={index}>
+            <td>{item.name}</td>
+            <td>{item.email}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+
 function App() {
+  const [contacts, setContact] = useState([]);
+  const getdata = (values) => {
+    // console.log(values.name);
+    // console.log(values.email);
+    setContact([].concat(contacts, values));
+    console.log(contacts);
+  };
   return (
     <div>
       <h1>Contact App</h1>
-      <ContactForm />
+      <ContactForm getdata1={getdata} />
+      <Table values={contacts} />
     </div>
   );
 }
