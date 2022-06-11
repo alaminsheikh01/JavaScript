@@ -9,17 +9,15 @@ const Table = ({ values }) => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
+  const searchCB = (value) =>
+    value.name.includes(searchTerm) || value.email.includes(searchTerm);
+
   let filteredContacts = [];
   if (filter === "all") {
-    filteredContacts = values;
+    filteredContacts = searchTerm ? values.filter(searchCB) : values;
   } else {
-    filteredContacts = values.filter((value) => value.group === filter);
-  }
-
-  if (searchTerm) {
-    filteredContacts = filteredContacts.filter(
-      (value) =>
-        value.name.includes(searchTerm) || value.email.includes(searchTerm)
+    filteredContacts = values.filter(
+      (value) => value.group === filter && searchCB(value)
     );
   }
 
