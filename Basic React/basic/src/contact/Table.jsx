@@ -25,6 +25,7 @@ const Table = ({ values }) => {
           <option value="home">Home</option>
           <option value="office">Office</option>
         </select>
+        <input type="search" placeholder="search" />
       </div>
       <br />
 
