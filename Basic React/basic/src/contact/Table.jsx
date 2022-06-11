@@ -7,11 +7,20 @@ const Table = ({ values }) => {
     setFilter(e.target.value);
   };
 
+  const [searchTerm, setSearchTerm] = useState("");
+
   let filteredContacts = [];
   if (filter === "all") {
     filteredContacts = values;
   } else {
     filteredContacts = values.filter((value) => value.group === filter);
+  }
+
+  if (searchTerm) {
+    filteredContacts = filteredContacts.filter(
+      (value) =>
+        value.name.includes(searchTerm) || value.email.includes(searchTerm)
+    );
   }
 
   return (
@@ -25,7 +34,12 @@ const Table = ({ values }) => {
           <option value="home">Home</option>
           <option value="office">Office</option>
         </select>
-        <input type="search" placeholder="search" />
+        <input
+          type="search"
+          placeholder="search"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
       <br />
 
