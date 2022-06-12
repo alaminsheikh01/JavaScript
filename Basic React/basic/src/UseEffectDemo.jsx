@@ -16,6 +16,16 @@ const UseEffectDemo = () => {
    * 3. if we will give any condition inside the useEffect then it will be shouldComponentUpdate
    * 4. if we will return something from the useEffect then it will be componentWillUnMount
    */
+  useEffect(() => {
+    let time = null;
+    if (lock) {
+      time = setTimeout(() => {
+        setCount(0);
+        setLock(false);
+        clearTimeout(time);
+      }, 5000);
+    }
+  }, [lock]);
 
   console.log("count: ", count, "lock: ", lock);
 
