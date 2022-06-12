@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 
 const Work_api = () => {
   const [user, setUser] = useState([]);
+  const [id, setId] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const max = 10;
 
   // fetch data way one; but here is a problem inside the network tab to load data infinite.
   //   fetch("https://jsonplaceholder.typicode.com/users")
@@ -10,15 +13,29 @@ const Work_api = () => {
 
   // fetch data way two.
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users/2")
+    setLoading(true);
+    fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
       .then((res) => res.json())
-      .then((data) => setUser(data));
-  }, []);
+      .then((data) => setUser(data))
+      .finally(setLoading(false));
+  }, [id]);
+
+  const nextHandler = () => {
+    if (id < max) {
+      setId(id + 1);
+    }
+  };
+  const previousHandler = () => {
+    if (id > 1) {
+      setId(id - 1);
+    }
+  };
 
   return (
     <div>
-      <h1>Users Details</h1>
-      {user && (
+      <h1>Users Details {id}</h1>
+      {loading && <p>Loading...</p>}
+      {!loading && user && (
         <div>
           name: {user.name}
           <br />
@@ -27,6 +44,15 @@ const Work_api = () => {
           phone: {user.phone}
         </div>
       )}
+      <br />
+      <div>
+        <button disabled={id === 1} onClick={previousHandler}>
+          previous
+        </button>{" "}
+        <button disabled={id === 10} onClick={nextHandler}>
+          next
+        </button>
+      </div>
     </div>
   );
 };
