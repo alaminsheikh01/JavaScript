@@ -6,6 +6,8 @@ const Work_api = () => {
   const [loading, setLoading] = useState(false);
   const max = 10;
 
+  const cashData = [];
+
   // fetch data way one; but here is a problem inside the network tab to load data infinite.
   //   fetch("https://jsonplaceholder.typicode.com/users")
   //     .then((res) => res.json())
@@ -13,10 +15,18 @@ const Work_api = () => {
 
   // fetch data way two.
   useEffect(() => {
+    if (cashData[`user-${id}`]) {
+      setUser(cashData[`user-${id}`]);
+      return;
+    }
+
     setLoading(true);
     fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
       .then((res) => res.json())
-      .then((data) => setUser(data))
+      .then((data) => {
+        setUser(data);
+        cashData[`user-${id}`] = data;
+      })
       .finally(setLoading(false));
   }, [id]);
 
