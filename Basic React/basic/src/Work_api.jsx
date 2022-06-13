@@ -35,6 +35,12 @@ const Work_api = () => {
     //   .finally(setLoading(false));
   }, [id]);
 
+  useEffect(() => {
+    if (!cashData[`user-${id + 1}`] && id < max) {
+      fetchUsers(id + 1);
+    }
+  });
+
   const fetchUsers = (id) => {
     return fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
       .then((res) => res.json())
