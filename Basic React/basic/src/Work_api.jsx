@@ -21,14 +21,28 @@ const Work_api = () => {
     }
 
     setLoading(true);
-    fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-      .then((res) => res.json())
+    fetchUsers(id)
       .then((data) => {
         setUser(data);
-        cashData[`user-${id}`] = data;
       })
-      .finally(setLoading(false));
+      .finally(() => setLoading(false));
+    // fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setUser(data);
+    //     cashData[`user-${id}`] = data;
+    //   })
+    //   .finally(setLoading(false));
   }, [id]);
+
+  const fetchUsers = (id) => {
+    return fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        cashData[`user-${id}`] = data;
+        return data;
+      });
+  };
 
   const nextHandler = () => {
     if (id < max) {
