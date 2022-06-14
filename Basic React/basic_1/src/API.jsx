@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from "react";
 import useFetchData from "./hooks/useFetchData";
 
 function API() {
-  const users = useFetchData("https://jsonplaceholder.typicode.com/users");
-  const posts = useFetchData("https://jsonplaceholder.typicode.com/posts");
+  const users = useFetchData(
+    "https://jsonplaceholder.typicode.com/users",
+    (data) => data.map((item) => ({ id: item.id, name: item.name }))
+  );
+  const posts = useFetchData(
+    "https://jsonplaceholder.typicode.com/posts",
+    (data) => data.slice(0, 5)
+  );
   const comments = useFetchData(
-    "https://jsonplaceholder.typicode.com/comments"
+    "https://jsonplaceholder.typicode.com/comments",
+    (data) => data.slice(0, 20)
   );
 
   return (

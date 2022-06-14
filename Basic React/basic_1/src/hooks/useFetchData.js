@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function useFetchData(url) {
+function useFetchData(url, cb) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -13,7 +13,12 @@ function useFetchData(url) {
     try {
       const res = await fetch(url);
       const result = await res.json();
-      setData(result);
+      if (cb) {
+        setData(cb(result));
+      } else {
+        setError(result);
+      }
+
       setError("");
       setLoading(false);
     } catch (e) {
