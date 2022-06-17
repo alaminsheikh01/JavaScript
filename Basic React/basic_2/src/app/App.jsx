@@ -10,20 +10,60 @@ const init = {
 function App() {
   const [formState, setFormState] = useState({ ...init });
   const [errors, setErrors] = useState({ ...init });
+  const [focuss, setFocuss] = useState({
+    title: false,
+    bio: false,
+    skills: false,
+  });
 
   const handleChange = (e) => {
     setFormState((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
+
+    const key = e.target.name;
+    const { errors } = checkValidity(formState);
+    if (!errors[key]) {
+      setErrors((prev) => ({
+        ...prev,
+        [key]: "",
+      }));
+    }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     const { isValid, errors } = checkValidity(formState);
     if (isValid) {
       console.log(formState);
+      setErrors({ ...errors });
     } else {
-      console.log(errors);
+      // console.log(errors);
+      setErrors({ ...errors });
+    }
+  };
+
+  const handleFocus = (e) => {
+    setFocuss((prev) => ({
+      ...prev,
+      [e.target.name]: true,
+    }));
+  };
+
+  const handleblur = (e) => {
+    const key = e.target.name;
+    const { errors } = checkValidity(formState);
+
+    if (errors[key] && focuss[key]) {
+      setErrors((prev) => ({
+        ...prev,
+        [key]: errors[key],
+      }));
+    } else {
+      setErrors((prev) => ({
+        ...prev,
+        [key]: "",
+      }));
     }
   };
 
@@ -56,6 +96,9 @@ function App() {
             label={"Title"}
             name={"title"}
             placeholder={"Software Engineer"}
+            error={errors.title}
+            onFocus={handleFocus}
+            onBlur={handleblur}
           />
           <InputGroup
             onChange={handleChange}
@@ -63,6 +106,9 @@ function App() {
             label={"Bio"}
             name={"bio"}
             placeholder={"I am a software engineer..."}
+            error={errors.bio}
+            onFocus={handleFocus}
+            onBlur={handleblur}
           />
           <InputGroup
             onChange={handleChange}
@@ -70,6 +116,9 @@ function App() {
             label={"Skills"}
             name={"skills"}
             placeholder={"javascript, react"}
+            error={errors.skills}
+            onFocus={handleFocus}
+            onBlur={handleblur}
           />
           <Button type="submit">Submit</Button>
         </div>
