@@ -10,6 +10,7 @@ import { deepClone, isObjEmpty } from "../utils/object-utils";
  * @param {Param} param
  * @returns
  */
+
 const useForm = ({ init, validate }) => {
   const [state, setState] = useState(mapValuesToState(init));
 
