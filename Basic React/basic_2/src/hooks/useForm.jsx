@@ -3,9 +3,24 @@ import { useState } from "react";
 const params = {
   init: {},
 };
+
+/**
+ *
+ * @typedef {Object} Param
+ * @property {Object} init
+ * @property {(Object | boolean)} validate
+ *
+ * create forms using this useForm hook easily
+ * @param {*} param0
+ * @returns
+ */
+
 const useForm = ({ init }) => {
-  const state = mapValuesToState(init);
-  console.log(state);
+  const [state, setState] = useState(mapValuesToState(init));
+
+  return {
+    formState: state,
+  };
 };
 
 // helper function
