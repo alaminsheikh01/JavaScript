@@ -54,10 +54,13 @@ function double(arr) {
 console.log(double([4, 3, 4]));
 
 // find and delete a unique name
+
 function uniqueName(arr) {
   let uniqueName = [];
+
   for (let i = 0; i < arr.length; i++) {
     let ele = arr[i];
+
     if (!uniqueName.includes(ele)) {
       uniqueName.push(ele);
     }
@@ -65,5 +68,5 @@ function uniqueName(arr) {
   return uniqueName;
 }
 
-let nameArray = ["alamin", "sheikh", "alamin"];
+let nameArray = ["alamin", "sheikh", "alamin", "awal", "sheikh", "alamin"];
 console.log(uniqueName(nameArray));
