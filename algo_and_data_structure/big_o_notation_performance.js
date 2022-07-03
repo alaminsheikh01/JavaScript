@@ -70,3 +70,14 @@ function uniqueName(arr) {
 
 let nameArray = ["alamin", "sheikh", "alamin", "awal", "sheikh", "alamin"];
 console.log(uniqueName(nameArray));
+
+// check time complexity using while loop
+function anotherLogN(n) {
+  if (n <= 1) {
+    console.log("done");
+    return;
+  }
+  console.log(n);
+  anotherLogN(n / 2);
+}
+anotherLogN(8);
