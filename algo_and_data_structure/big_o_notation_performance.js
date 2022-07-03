@@ -27,4 +27,43 @@ function multipleArray(n) {
     }
   }
 }
-console.log(multipleArray(2));
+// console.log(multipleArray(2));
+
+/**
+ * space complexity
+ */
+
+// sum of one dimentional array // big o(1) // reason here depand on total
+function sum(arr) {
+  let total = 0;
+  for (let i = 0; i < arr.length; i++) {
+    total += arr[i];
+  }
+  return total;
+}
+// console.log(sum([23, 4, 6]));
+
+// space compixity of big o(n) // which is depand on array
+function double(arr) {
+  let newArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    newArr.push(arr[i] * 2);
+  }
+  return newArr;
+}
+console.log(double([4, 3, 4]));
+
+// find and delete a unique name
+function uniqueName(arr) {
+  let uniqueName = [];
+  for (let i = 0; i < arr.length; i++) {
+    let ele = arr[i];
+    if (!uniqueName.includes(ele)) {
+      uniqueName.push(ele);
+    }
+  }
+  return uniqueName;
+}
+
+let nameArray = ["alamin", "sheikh", "alamin"];
+console.log(uniqueName(nameArray));
