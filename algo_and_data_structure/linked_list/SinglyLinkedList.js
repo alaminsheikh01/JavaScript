@@ -77,6 +77,7 @@ class SinglyLinkedList {
     return currentNode;
   }
 
+  // added value from the frst node
   unShift(value) {
     let newNode = new Node(value);
 
@@ -90,6 +91,7 @@ class SinglyLinkedList {
     this.length++;
   }
 
+  // show value as a list
   showList() {
     let arr = [];
     let currentNode = this.head;
