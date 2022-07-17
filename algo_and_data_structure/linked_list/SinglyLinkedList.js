@@ -89,17 +89,31 @@ class SinglyLinkedList {
     }
     this.length++;
   }
+
+  showList() {
+    let arr = [];
+    let currentNode = this.head;
+
+    while (currentNode) {
+      arr.push(currentNode.value);
+      currentNode = currentNode.next;
+    }
+
+    return arr;
+  }
 }
 
 let list = new SinglyLinkedList();
 // console.log(list);
 // console.log(list.isEmpty());
+
 list.push(5);
 list.push("Hello");
 list.unShift(8);
 list.push(10);
 list.push(15);
 
+console.log(list.showList());
 // list.shift();
 
 // list.pop();
