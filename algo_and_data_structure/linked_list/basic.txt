@@ -1,0 +1,10 @@
+singly linked list is pointer or node, there inside will be a value, 
+and it's pointer will be next node value
+
+=> every node there two thing need to remember one is vlaue and another one is pointer 
+=> first node is called head, and last node is called tail
+
+=> different between single linded list and double linked list
+  1. single linked list just pointer next value node or next value.
+  2. and double linked list poit the both value next and previus node.
+
