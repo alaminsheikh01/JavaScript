@@ -1,0 +1,16 @@
+Track Zone
+
+Track Zone Project Overview
+
+1. User can set their own time and timezone this clock can't be deleted only be eidited
+2. User can create as many clock as they want
+ -> Each clock has their own title or name
+ -> Own timezone
+ -> simple events with time
+ -> Time different between users timezone and clock timezone in hour and minute
+
+3. User can edit or delete a clock.
+4. Timezone could be UTC (standard) GMT, PST, EST 
+5. only date-fns library is allowed for this project, rest of the logic should write by yourself
+6.Every data must be validated.
+
