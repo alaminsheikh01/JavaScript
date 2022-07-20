@@ -14,3 +14,22 @@
  * convert string to array
  * join with '%20'
  */
+
+function Urlify(str, n) {
+  let newStr = "";
+
+  for (i = 0; i < n; i++) {
+    if (str[i] === " ") {
+      newStr += "%20";
+    } else {
+      newStr += str[i];
+    }
+  }
+  return newStr;
+}
+
+console.log(Urlify("Mr Alamin Sheikh", 16));
+
+/**
+ * output: Mr%20Alamin%20Sheikh
+ */
